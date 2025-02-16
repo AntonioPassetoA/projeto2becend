@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmar Compra</title>
+</head>
+<body>
+  <h1>Confirmar Compra</h1>
+  <ul>
+    {{#each ticketDetails}}
+      <li>
+        <strong>Ingresso:</strong> {{this.nome}} <br>
+        <strong>Preço:</strong> R$ {{this.preco}} <br>
+        <strong>Quantidade:</strong> {{this.quantidade}} <br>
+        <strong>Total:</strong> R$ {{this.total}} <br> <!-- Exibe o total calculado -->
+      </li>
+    {{/each}}
+  </ul>
+  <p><strong>Total a pagar:</strong> R$ {{total}}</p>
+
+  <form action="/vendas/confirmar" method="POST">
+    <button type="submit">Confirmar Compra</button>
+  </form>
+
+  <form action="/vendas/cancelar" method="GET">
+    <button type="submit">Cancelar Compra</button>
+  </form>
+</body>
+</html>

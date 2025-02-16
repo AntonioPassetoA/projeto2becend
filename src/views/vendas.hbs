@@ -1,0 +1,15 @@
+{{! vendas.hbs }}
+{{#*inline "title"}}Página de Vendas{{/inline}} <!-- Define o título da página de vendas -->
+
+<h2>Página de Vendas</h2>
+<form action="/vendas" method="POST"> <!-- Rota POST para comprar -->
+  <label for="vip">Ingresso VIP (R$ 50):</label>
+  <input type="number" id="vip" name="vip" min="0" value="1">
+
+  <label for="normal">Ingresso Normal (R$ 20):</label>
+  <input type="number" id="normal" name="normal" min="0" value="1">
+
+  <button type="submit">Comprar</button>
+</form>
+
+<p><a href="/historico">Ver Histórico</a></p>

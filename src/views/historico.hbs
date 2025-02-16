@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histórico de Compras</title>
+</head>
+<body>
+  <h1>Histórico de Compras</h1>
+
+  <ul>
+    {{#each purchases}}
+      <li>
+        <strong>ID da Compra:</strong> {{this.id}} <br>
+        <strong>Status:</strong> {{this.status}} <br>
+        <strong>Ingressos:</strong>
+        <ul>
+          {{#each this.tickets}}
+            <li>{{this.nome}} - Quantidade: {{this.quantidade}}</li>
+          {{/each}}
+        </ul>
+      </li>
+    {{/each}}
+  </ul>
+
+  <a href="/vendas">Voltar à página de vendas</a>
+</body>
+</html>
