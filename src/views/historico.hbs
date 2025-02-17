@@ -11,12 +11,12 @@
   <ul>
     {{#each purchases}}
       <li>
-        <strong>ID da Compra:</strong> {{this.id}} <br>
-        <strong>Status:</strong> {{this.status}} <br>
+        <strong>ID da Compra:</strong> {{this.dataValues.id}} <br>
+        <strong>Status:</strong> {{this.dataValues.status}} <br>
         <strong>Ingressos:</strong>
         <ul>
-          {{#each this.tickets}}
-            <li>{{this.nome}} - Quantidade: {{this.quantidade}}</li>
+          {{#each this.Tickets}}
+            <li>{{this.dataValues.nome}} - Quantidade: {{this.PurchaseTicket.dataValues.quantidade}}</li>
           {{/each}}
         </ul>
       </li>

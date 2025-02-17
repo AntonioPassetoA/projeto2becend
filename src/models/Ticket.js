@@ -25,5 +25,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
+  Ticket.associate = (models) => {
+    Ticket.belongsToMany(models.Purchase, {
+      through: models.PurchaseTicket,
+      foreignKey: 'ticketId',
+      otherKey: 'purchaseId',
+    });
+    
+  };
   return Ticket;
-};
+}
+ 
+

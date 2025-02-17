@@ -16,6 +16,8 @@ router.get('/historico', authenticate, purchaseController.getPurchaseHistory);  
 router.post('/cancelar/:purchaseId', authenticate, purchaseController.cancelPurchase);  // Cancela a compra
 
 // Rota para confirmar a compra
+router.get('/confirmacaoCompra/:purchaseId', authenticate, purchaseController.showConfirmPurchase);  // Confirma a compra
+
 router.post('/confirmar/:purchaseId', authenticate, purchaseController.confirmPurchase);  // Confirma a compra
 
 module.exports = router;

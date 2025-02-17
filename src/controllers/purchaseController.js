@@ -18,11 +18,11 @@ exports.createPurchase = async (req, res) => {
   if (!vip && !normal) {
     return res.status(400).json({ message: 'Nenhum ingresso selecionado para compra.' });
   }
-
+  console.log(vip);
   try {
     // Criar a compra para o usuário autenticado
     const purchase = await Purchase.create({ usuarioId: req.user.id, status: 'pendente' });
-
+     
     // Se houver ingressos VIP
     if (vip > 0) {
       const ticketVIP = await Ticket.findOne({ where: { nome: 'VIP' } });
@@ -68,13 +68,14 @@ exports.getPurchaseHistory = async (req, res) => {
         through: { attributes: ['quantidade'] },
       }],
     });
-
+    console.log (purchases[purchases.length - 1].Tickets[0])
     res.render('historico', { purchases });
   } catch (error) {
     console.error('Erro ao buscar histórico de compras:', error);
     res.status(500).json({ message: 'Erro ao buscar histórico de compras' });
   }
-};
+}; 
+
 
 // Função para confirmar a compra
 exports.confirmPurchase = async (req, res) => {
@@ -117,3 +118,25 @@ exports.cancelPurchase = async (req, res) => {
     res.status(500).json({ message: 'Erro ao cancelar a compra' });
   }
 };
+
+exports.showConfirmPurchase = async (req, res) => {
+  const purchase = await Purchase.findOne({
+    where: { id: req.params.purchaseId }, include: [{
+      model: Ticket,
+      through: { attributes: ['quantidade'] },
+    }]
+  });
+
+  const ticketDetails = purchase.Tickets.map(ticket => {
+    return {
+      nome: ticket.dataValues.nome,
+      preco: ticket.dataValues.preco,
+      quantidade: ticket.PurchaseTicket.dataValues.quantidade,
+      total: ticket.dataValues.preco * ticket.PurchaseTicket.dataValues.quantidade
+    }
+
+  })
+  const valorTotalIngressos = ticketDetails.reduce((accumulator, currentValue) => accumulator + currentValue.total, 0)
+  res.render('confirmacaoCompra', { ticketDetails,valorTotalIngressos,purchaseId:req.params.purchaseId});
+}
+

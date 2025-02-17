@@ -1,6 +1,5 @@
 require('dotenv').config();
 const { Sequelize, DataTypes } = require('sequelize');
-
 // Conexão com o banco de dados
 const sequelize = new Sequelize({
   host: process.env.DB_HOST,
@@ -14,5 +13,14 @@ const sequelize = new Sequelize({
 // Importação dos modelos
 const User = require('./User')(sequelize, DataTypes);
 
+const  Purchase = require ('./Purchase')(sequelize , DataTypes);
+const Ticket = require ('./Ticket') (sequelize , DataTypes);
+const PurchaseTicket = require ('./purchaseTicket') (sequelize , DataTypes);
+
+Ticket.associate({Purchase, PurchaseTicket});
+
+Purchase.associate({Ticket,PurchaseTicket});
+
 // Exportando a conexão e os modelos
-module.exports = { sequelize, User };
+module.exports = { sequelize, User , Purchase ,  Ticket, PurchaseTicket};
+

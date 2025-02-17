@@ -17,13 +17,13 @@
       </li>
     {{/each}}
   </ul>
-  <p><strong>Total a pagar:</strong> R$ {{total}}</p>
+  <p><strong>Total a pagar:</strong> R$ {{this.valorTotalIngressos}}</p>
 
-  <form action="/vendas/confirmar" method="POST">
+  <form action="/confirmar/{{this.purchaseId}}" method="POST">
     <button type="submit">Confirmar Compra</button>
   </form>
 
-  <form action="/vendas/cancelar" method="GET">
+  <form action="/cancelar/{{this.purchaseId}}" method="POST">
     <button type="submit">Cancelar Compra</button>
   </form>
 </body>

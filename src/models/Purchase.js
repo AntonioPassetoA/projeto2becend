@@ -1,9 +1,10 @@
 // src/models/Purchase.js
 module.exports = (sequelize, DataTypes) => {
+  
   const Purchase = sequelize.define('Purchase', {
     usuarioId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
     status: {
       type: DataTypes.STRING,
@@ -11,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   });
-
+  
   Purchase.associate = (models) => {
     // Relacionando com os ingressos
     Purchase.belongsToMany(models.Ticket, {
-      through: 'PurchaseTicket',
+      through: models.PurchaseTicket,
       foreignKey: 'purchaseId',
       otherKey: 'ticketId'
     });
